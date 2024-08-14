@@ -15,13 +15,17 @@ ASSCO_TABLE_NAME = 'ASSOC_DATA'
 
 
 @router.get("", responses={status.HTTP_200_OK: {"model": List[ASSOC_DATA]}})
-def list(c_personid: Optional[int] = None):
+def list(c_personid: Optional[int] = None, showTotal: Optional[bool] = True):
     fields = {}
     if c_personid:
         fields['c_personid'] = c_personid
     print(ASSOC_DATA.__fields__.keys())
     list = db.query_db(db_file=DB_FILE, table=ASSCO_TABLE_NAME, fields=fields)
-    res = {}
-    res['list'] = [dict(zip(ASSOC_DATA.__fields__.keys(), row)) for row in list]
-    res['total'] = len(list)
-    return res
+    list_dict =  [dict(zip(ASSOC_DATA.__fields__.keys(), row)) for row in list]
+    if(showTotal is False):
+        return list_dict   
+    else:
+        res = {}
+        res['list'] = list_dict
+        res['total'] = len(list)
+        return res

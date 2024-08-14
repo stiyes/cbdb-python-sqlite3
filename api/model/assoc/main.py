@@ -18,8 +18,10 @@ class ASSOC_DATA(BaseModel):
   c_assoc_year: Optional[int] = Field(None,ge=0)  # 
   c_source: Optional[int] = Field(None,ge=0)  # 记录的来源，一般是c_textid
   c_pages: str = Field(None)  # 记录来源的具体页面编码
+  c_pages_zh: str = Field(None)  # 记录来源的具体页面编码
   c_secondary_source_author: str = Field(None)  # 
   c_notes:  str = Field(None) # 记录的文案备注
+  c_notes_zh:  str = Field(None) # 记录的文案备注
   c_assoc_nh_code: int = Field(None) # 记录的文案备注
   c_assoc_nh_year: int = Field(None) # 记录的文案备注
   c_assoc_range: int = Field(None) # 记录的文案备注
@@ -30,6 +32,7 @@ class ASSOC_DATA(BaseModel):
   c_inst_code: int = Field(None) # 记录的文案备注
   c_inst_name_code: int = Field(None) # 记录的文案备注
   c_text_title: str = Field(None) # 记录的文案备注
+  c_text_title_zh: str = Field(None) # 记录的文案备注
   c_assoc_claimer_id: int = Field(None) # 记录的文案备注
   c_assoc_intercalary: bool = Field(None, description="")
   c_assoc_month: int = Field(None) # 记录的文案备注

@@ -101,6 +101,9 @@ table_name = 'TEXT_INSTANCE_DATA'
 c_id = 'tts_sysno1'
 source_columns = ['c_counter','c_print','c_publisher']
 
+table_name = 'ASSOC_DATA'
+c_id = 'tts_sysno1'
+source_columns = ['c_text_title','c_notes','c_pages']
 
 
 # 限制条件测试数据

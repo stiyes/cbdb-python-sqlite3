@@ -34,6 +34,16 @@ def query_db(db_file, table, fields):
     with db_cursor(db_file, commit=False) as cursor:
         return cursor.execute(f"SELECT * FROM {table} where {named_fields_clause}", fields).fetchall()
 
+def query_db_one(db_file, table, fields):
+    if not fields:
+        return query_db_all(db_file, table)
+
+    named_fields = [f"{field_name} = :{field_name}" for field_name in fields.keys()]
+    named_fields_clause = ' AND '.join(named_fields)
+
+    with db_cursor(db_file, commit=False) as cursor:
+        return cursor.execute(f"SELECT * FROM {table} where {named_fields_clause}", fields).fetchone()
+
 def query_db_many(db_file, table, fields):
     print(f"query_db_many {db_file}: {table} {fields}")
     if not fields:

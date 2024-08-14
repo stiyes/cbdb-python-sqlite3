@@ -11,6 +11,8 @@ from api.utils import db
 from api.utils.db import DB_FILE
 from api.utils.login import validate_access_token
 
+from api.v1.routers.assoc.main import list as list_assoc
+
 router = APIRouter()
 BIOG_TABLE_NAME = 'BIOG_MAIN'
 ASSOC_DATA_TABLE_NAME = 'ASSOC_DATA'
@@ -31,12 +33,14 @@ def list_biog(c_personid: Optional[int] = None, c_name_chn: Optional[str] = None
 @router.get("/{c_personid}", responses={status.HTTP_200_OK: {"model": BIOG_MAIN},
                                   status.HTTP_404_NOT_FOUND: {"model": GenericExceptionMessage}})
 def get_biog_details(c_personid: int):
+    fields ={'c_personid': c_personid}
+    biog_detail = db.query_db_one(db_file=DB_FILE, table=BIOG_TABLE_NAME, fields=fields)
+    biog_assoc_list = list_assoc(c_personid=c_personid, showTotal=False)
+    print(biog_assoc_list)
 
-    result =  db.query_inner_join(db_file=DB_FILE, table_left=BIOG_TABLE_NAME, table_right=ASSOC_DATA_TABLE_NAME,
-                            field_key_left='c_personid', field_key_right='c_personid', field_filters_left={'c_personid': c_personid}, field_filters_right={})
-    # 打印结果
-    for item in result:
-        print(item)
+    json = dict(zip(BIOG_MAIN.__fields__.keys(), biog_detail))
+    json['assoc_data'] = biog_assoc_list
+    return json
     # result2 = db.query_inner_join(db_file=DB_FILE, table_left==BIOG_TABLE_NAME, table_right= ASSOC_DATA_TABLE_NAME fields={"c_personid": c_personid})
     # result = db.query_db(db_file=DB_FILE, table=BIOG_TABLE_NAME, fields={"c_personid": c_personid})
 
@@ -45,7 +49,7 @@ def get_biog_details(c_personid: int):
     #                         content={"status_code": status.HTTP_404_NOT_FOUND,
     #                                  "detail": f"BIOG_MAIN with c_personid {c_personid} didn't exists in DB."})
 
-    # # 将元组转换为字典
+    # 将元组转换为字典
     # result_dict = [dict(zip(BIOG_MAIN.__fields__.keys(), row)) for row in result]
 
     # # 如果 result_dict 的长度为 1，则返回字典，否则返回列表

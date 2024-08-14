@@ -8,6 +8,7 @@ class BIOG_MAIN(BaseModel):
   c_personid: Optional[int] = Field(None,ge=0)  # 可以为 None 或大于 0 的整数
   c_name: Optional[str] = Field(None)  # 可以为 None 或至少有一个字符的字符串
   c_name_chn: Optional[str] = Field(None)  # 可以为 None 或至少有一个字符的字符串
+  c_name_chn_zh: Optional[str] = Field(None)  # 可以为 None 或至少有一个字符的字符串
   c_index_year: Optional[int] = Field(None,ge=0)
   c_index_year_type_code: Optional[str] = None  # 可以为 None 或至少有一个字符的字符串
   c_index_year_source_id: Optional[int] = Field(None,ge=0)
@@ -31,17 +32,22 @@ class BIOG_MAIN(BaseModel):
   c_fl_ey_nh_code: int = Field(None,ge=0)
   c_fl_ey_nh_year: int = Field(None,ge=0)
   c_fl_ey_notes:str = Field(None)  # 可以为 None 或至少有一个字符的字符串
+  c_fl_ey_notes_zh:str = Field(None)  # 可以为 None 或至少有一个字符的字符串
   c_fl_latest_year: int = Field(None,ge=0)
   c_fl_ly_nh_code: int = Field(None,ge=0)
   c_fl_ly_nh_year: int = Field(None,ge=0)
   c_fl_ly_notes:str = Field(None)  # 可以为 None 或至少有一个字符的字符串
+  c_fl_ly_notes_zh:str = Field(None)  # 可以为 None 或至少有一个字符的字符串
   c_surname: str = Field(None)  # 可以为 None 或至少有一个字符的字符串
   c_surname_chn: str = Field(None)  # 可以为 None 或至少有一个字符的字符串
+  c_surname_chn_zh: str = Field(None)  # 可以为 None 或至少有一个字符的字符串
   c_mingzi: str = Field(None)  # 可以为 None 或至少有一个字符的字符串
   c_mingzi_chn: str = Field(None)  # 可以为 None 或至少有一个字符的字符串
+  c_mingzi_chn_zh: str = Field(None)  # 可以为 None 或至少有一个字符的字符串
   c_dy: int = Field(None,ge=0)
   c_choronym_code: int = Field(None,ge=0)
   c_notes:str = Field(None)  # 可以为 None 或至少有一个字符的字符串
+  c_notes_zh:str = Field(None)  # 可以为 None 或至少有一个字符的字符串
   c_by_intercalary: bool = Field(None, description="")
   c_dy_intercalary: bool= Field(None, description="")
   c_by_month: int = Field(None,ge=0)
